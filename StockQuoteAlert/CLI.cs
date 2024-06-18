@@ -1,6 +1,6 @@
 ﻿namespace CLI;
 
-internal class CLIArguments
+public class CLIArguments
 {
 	public string targetStock { get; set; }
 	public decimal sellPrice { get; set; }
