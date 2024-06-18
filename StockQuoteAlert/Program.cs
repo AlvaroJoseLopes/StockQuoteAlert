@@ -6,11 +6,19 @@
         {
             var cliArgs = CLI.Parser.Parse(args);
             var settings = ProgramSettings.Parser.Parse("settings.json");
-            var client = new StockAPI.Client(settings!.Api!.Token);
+            var api_client = new StockAPI.Client(settings.Api.Token);
+            var sender = new EmailSender(settings.Smtp);
+
             while (true)
             {
-                var price = await client.GetMarketPrice(cliArgs.targetStock);
-                Console.WriteLine(price);
+                var price = await api_client.GetMarketPrice(cliArgs.targetStock);
+                Console.WriteLine($"Current price for {cliArgs.targetStock} is {price}.");
+                
+                if (price >= cliArgs.sellPrice)
+                    sender.sendSellMessage(cliArgs, price);
+                else if (price <= cliArgs.buyPrice)
+                    sender.sendBuyMessage(cliArgs, price);
+
                 Thread.Sleep(settings.Api.Delay);
             }
                 
