@@ -54,13 +54,13 @@ StockQuoteAlert.exe PETR4 22,67 22,59
 
 ## Project Structure
 
-* [Program.cs](StockQuoteAlert/Program.cs): contains the main application logic.
-* [CLI.cs](StockQuoteAlert/CLI.cs): CLI arguments parser.
-* [ProgramSettings.cs](StockQuoteAlert/ProgramSettings.cs): JSON program settings parser.
-* [StockAPI.cs](StockQuoteAlert/StockAPI.cs): Wrapper for Brapi's API that gets the current price of the monitored stock.
-* [EmailSender.cs](StockQuoteAlert/EmailSender.cs): Wrapper for the SMTP client that notifies users by email.
+* [Program.cs:](StockQuoteAlert/Program.cs) contains the main application logic.
+* [CLI.cs:](StockQuoteAlert/CLI.cs) CLI arguments parser.
+* [ProgramSettings.cs:](StockQuoteAlert/ProgramSettings.cs) JSON program settings parser.
+* [StockAPI.cs:](StockQuoteAlert/StockAPI.cs) Wrapper for Brapi's API that gets the current price of the monitored stock.
+* [EmailSender.cs:](StockQuoteAlert/EmailSender.cs) Wrapper for the SMTP client that notifies users by email.
 
 ## Next Steps
 
 Currently, this program only tracks one stock symbol and supports a single selling/buying price.
-So, one next step is to expand the program to track multiple stocks and send personalized email notifications with user-defined price stocks of interest and thresholds. To handle this, a pub/sub pattern could be used.
+So, one next step is to expand the program to track multiple stocks and send personalized email notifications with user-defined stocks of interest and price thresholds. To handle this, a pub/sub pattern could be used.
