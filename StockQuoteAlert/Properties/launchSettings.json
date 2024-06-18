@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StockQuoteAlert": {
+      "commandName": "Project",
+      "commandLineArgs": "PETR4 50.00 40.00 "
+    }
+  }
+}
