@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Text.Json;
 using System.Text.Json.Nodes;
 namespace StockAPI;
 
@@ -30,8 +30,25 @@ public class Client
             Console.WriteLine($"Exception: {e.Message}");
         }
 
+        var parsedContent = JsonNode.Parse(content);
+        ThrowExceptionIfNull(parsedContent);
+        var results = parsedContent!["results"];
+        ThrowExceptionIfNull(results);
+        var priceField = results![0];
+        ThrowExceptionIfNull(priceField);
+        var price = priceField!["regularMarketPrice"];
+        ThrowExceptionIfNull(price);
+        var priceValue = price!.GetValue<decimal>();
 
-        return JsonNode.Parse(content)!["results"]![0]!["regularMarketPrice"]!.GetValue<decimal>();
+        return priceValue;
+    }
+
+    private void ThrowExceptionIfNull(object? x)
+    {
+        if (x == null)
+        {
+            throw new JsonException("Couldn't access correct fields from payload to retrieve current market price");
+        }
     }
 
     private string Url(string stock)
