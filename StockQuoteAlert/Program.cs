@@ -1,32 +1,26 @@
-﻿internal static class Program
+﻿using StockAPI;
+
+internal static class Program
 {
+    const string settingsFile = "settings.json";
     public static async Task Main(string[] args)
     {
-        try
-        {
-            var cliArgs = CLI.Parser.Parse(args);
-            var settings = ProgramSettings.Parser.Parse("settings.json");
-            var api_client = new StockAPI.Client(settings.Api.Token);
-            var sender = new EmailSender(settings.Smtp);
+        var cliArgs = Cli.Parser.Parse(args);
+        var settings = ProgramSettings.Parser.Parse(settingsFile);
+        var apiClient = new Client(settings.Api.Token);
+        var sender = new Email.Email(settings.Smtp);
 
-            while (true)
-            {
-                var price = await api_client.GetMarketPrice(cliArgs.targetStock);
-                Console.WriteLine($"Current price for {cliArgs.targetStock} is {price}.");
-                
-                if (price >= cliArgs.sellPrice)
-                    sender.sendSellMessage(cliArgs, price);
-                else if (price <= cliArgs.buyPrice)
-                    sender.sendBuyMessage(cliArgs, price);
-
-                Thread.Sleep(settings.Api.Delay);
-            }
-                
-        } 
-        catch (Exception e)
+        while (true)
         {
-            Console.WriteLine($"Exception: {e.Message}");
-            Environment.Exit(1);
+            var price = await apiClient.GetMarketPrice(cliArgs.targetStock);
+            Console.WriteLine($"Current price for {cliArgs.targetStock} is {price}.");
+                
+            if (price >= cliArgs.sellPrice)
+                sender.sendSellMessage(cliArgs, price);
+            else if (price <= cliArgs.buyPrice)
+                sender.sendBuyMessage(cliArgs, price);
+
+            await Task.Delay(settings.Api.Delay);
         }
     }
 }
