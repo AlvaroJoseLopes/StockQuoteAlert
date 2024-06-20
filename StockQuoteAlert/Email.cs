@@ -1,16 +1,15 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Mail;
-using CLI;
+using Cli;
 using ProgramSettings;
-using static ProgramSettings.Settings.SmtpSettings;
+namespace Email;
 
-public class EmailSender
+public class Email
 {
 	private SmtpClient _client;
 	private Settings.SmtpSettings _settings;
 
-	public EmailSender(Settings.SmtpSettings settings)
+	public Email(Settings.SmtpSettings settings)
 	{
 		_settings = settings;
 		_client = new SmtpClient(settings.Host)
@@ -21,7 +20,7 @@ public class EmailSender
 		};
 	}
 
-	public void sendSellMessage(CLIArguments cliArgs, decimal price)
+	public void sendSellMessage(CliArguments cliArgs, decimal price)
 	{
 		Console.WriteLine($"Sending email to each target suggesting selling {cliArgs.targetStock}");
         MailMessage message = new()
@@ -43,7 +42,7 @@ public class EmailSender
         Console.WriteLine("Emails sent!");
     }
 
-    public void sendBuyMessage(CLIArguments cliArgs, decimal price)
+    public void sendBuyMessage(CliArguments cliArgs, decimal price)
     {
         Console.WriteLine($"Sending email to each target suggesting buying {cliArgs.targetStock}");
         MailMessage message = new()
