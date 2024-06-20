@@ -1,12 +1,12 @@
-﻿namespace CLI;
+﻿namespace Cli;
 
-public class CLIArguments
+public class CliArguments
 {
 	public string targetStock { get; set; }
 	public decimal sellPrice { get; set; }
 	public decimal buyPrice { get; set; }
 
-	public CLIArguments(string targetStock, decimal sellPrice, decimal buyPrice)
+	public CliArguments(string targetStock, decimal sellPrice, decimal buyPrice)
 	{
         if (sellPrice < buyPrice)
         {
@@ -21,7 +21,7 @@ public class CLIArguments
 
 internal class Parser
 {
-	public static CLIArguments Parse(string[] args)
+	public static CliArguments Parse(string[] args)
 	{
 		if (args.Count() != 3)
 		{
@@ -40,6 +40,6 @@ internal class Parser
         }
 
 
-        return new CLIArguments(targetStock, sellPrice, buyPrice);
+        return new CliArguments(targetStock, sellPrice, buyPrice);
 	}
 }
