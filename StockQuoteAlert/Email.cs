@@ -36,7 +36,7 @@ public class Email
             IsBodyHtml = true,
         };
         foreach (var targetEmail in _settings.TargetEmails)
-            message.To.Add(targetEmail.Email);
+            message.To.Add(targetEmail);
 
         _client.Send(message);
         Console.WriteLine("Emails sent!");
@@ -58,7 +58,7 @@ public class Email
             IsBodyHtml = true,
         };
         foreach (var targetEmail in _settings.TargetEmails)
-            message.To.Add(targetEmail.Email);
+            message.To.Add(targetEmail);
 
         _client.Send(message);
         Console.WriteLine("Emails sent!");

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 namespace ProgramSettings;
 
 
@@ -21,12 +22,7 @@ public class Settings
         public required string Password { get; set; }
         public required string Sender { get; set; } = "noreply@stockalert.com";
 
-        public class TargetEmail
-        {
-            public required string Email { set; get; }
-            public required string Name { set; get; }
-        }
-        public required IEnumerable<TargetEmail> TargetEmails { get; set; }
+        public required IEnumerable<string> TargetEmails { get; set; }
     }
 
 
