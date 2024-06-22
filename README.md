@@ -26,14 +26,9 @@ Before running the project, it's necessary to configure the program settings, wh
 		"Password": "SMTP_PASSWORD",
 		"Sender": "noreply@stockalert.com",
 		"TargetEmails": [
-			{
-				"Email": "example1@domain.com",
-				"Name": "Example1"
-			},
-			{
-				"Email": "example2@domain.com",
-				"Name": "Example2"
-			}
+			"example1@domain.com",
+			"example2@domain.com",
+			"example3@domain.com"
 		]
 	}
 }
