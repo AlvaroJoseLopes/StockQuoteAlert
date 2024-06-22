@@ -2,9 +2,9 @@
 
 public class CliArguments
 {
-	public string targetStock { get; set; }
-	public decimal sellPrice { get; set; }
-	public decimal buyPrice { get; set; }
+	public readonly string targetStock;
+	public readonly decimal sellPrice;
+	public readonly decimal buyPrice; 
 
 	public CliArguments(string targetStock, decimal sellPrice, decimal buyPrice)
 	{
